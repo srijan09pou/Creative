@@ -1,451 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Home</title>
-    <style>
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+	
+	  /* Global styles */
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+            justify-content: center;
+            align-items: center;
+            background-color: #57CE00;
+        }
+        
+.post {
+    border: 1px solid #000000;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9; /* Light gray background color */
+}
+
+.post img, .post video {
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 10px;
+}
+
+/* User info styles */
+.user-info {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid #000000;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;    
+    margin-left: 20px;    
+    flex-grow: 1;
+}
+
+.details span {
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.metadata {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
+.metadata i {
+    margin-right: 5px;
+}
+
+.metadata img {
+    margin-left: 10px;
+    width: 15px; /* Adjust width as needed */
+    height: 15px; /* Adjust height as needed */
+}
+
+.caption {
+    margin-left: 10px;
+}
+
+/* Post actions styles */
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.action-box {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    width: 80px;
+    height: 35px;
+    border-radius: 30px;
+    border: 1px solid #000000;
+    cursor: pointer;
+}
+
+.post-actions img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 3px;
+    line-height: 50px;
+    border-radius: 50%;
+    border: 1px solid #000000;
+}
+
+/* Post caption styles */
+.post-caption {
+    font-size: 16px;
+    margin: 10px 0;
+    padding: 0 10px;
+}
+    </style>
 </head>
 <body>
+    <h1>Home Page</h1>
+<button type="button" onclick="navigateToSharePost()">Navigate to Share Post</button>
+    <div id="posts-container"></div> 
 
-<header>
-    <h4>facebook</h4>
-    <div class="brand">
-        <img src="search.png" alt="Search" onclick="navigateToPage('search')">
-        <img src="menu.png" alt="Menu" onclick="navigateToPage('menu')">
-    </div>
-</header>
+<script>
+function navigateToSharePost() {
+    window.location.href = 'sharepost.html';
+}
+</script>
 
-	<nav>
-    <img src="home1.png" alt="Home" onclick="navigateToPage('home')">
-    <img src="friends.png" alt="Friends" onclick="navigateToPage('friends')">
-    <img src="chat.png" alt="Chat" onclick="navigateToPage('chat')">
-    <img src="tv.png" alt="TV" onclick="navigateToPage('tv')">
-    <img src="notifications.png" alt="Notifications" onclick="navigateToPage('notifications')">
-    <img src="group.png" alt="Groups" onclick="navigateToPage('groups')">
-    </nav>
+    <script>
+        function displayPosts() {
+            const postsContainer = document.getElementById('posts-container');
+            const postCount = localStorage.length / 3; // 3 items stored per post (caption, mediaUrl, mediaType) 
 
-  <div class="second">
-    <img src="" alt="Profile Icon" class="avatar" id="profile-icon" onclick="openProfilePage()" aria-label="Profile">
-    <input type="text" id="post-text" placeholder="What's on your mind?" aria-label="Write a post">
-    <img src="img.png" alt="Camera" id="image-input" onclick="navigateToSharePost()" aria-label="Share a post">
-</div>
-    
-     <!-- Third Part -->
-     	<div class="story-scroll-container">
-    	<div class="story-container">
-        <div class="story-box" id="story-box-A" onclick="addImage('post-image', 'preview-image-B')">
-            <img class="preview-image" alt="Post Preview" id="preview-image-A">
-            <div class="user-infos">
-                <img src="user0-avatar.jpg" alt="Create" >
-                Create
-            </div>
-<div class="add-button">+</div>
-        </div>
+            for (let i = 0; i < postCount; i++) {
+                const caption = localStorage.getItem(`caption_${i}`);
+                const mediaUrl = localStorage.getItem(`mediaUrl_${i}`);
+                const mediaType = localStorage.getItem(`mediaType_${i}`); 
 
-        <div class="story-box" id="story-box-B">
-            <img class="preview-image" alt="Post Preview" id="preview-image-B">
-        
-         <div class="user-infos">
-                <img src="user2-avatar.jpg" alt="User B" >
-                User B
-            </div>
-            </div>
-            
+                if (mediaType === 'image' || mediaType === 'video') {
+                    const newPost = document.createElement('div');
+                    newPost.classList.add('post'); 
 
- 
-        <div class="story-box" onclick="showStory('User C')">
-            <div class="user-infos">
-                <img src="user3-avatar.jpg" alt="User C" >
-                User C
-            </div>
-        </div>
-        <div class="story-box" onclick="showStory('User D')">
-            <div class="user-infos">
-                <img src="user4-avatar.jpg" alt="User D" >
-                User D
-            </div>
-        </div>
-        <!-- Add more story boxes as needed -->
-  
-    <input type="file" id="post-image" name="post-image" accept="image/*" onchange="previewImage('post-image', 'preview-image-A')">
-</div>
-</div>
-     	
-     <!-- Third Part  End -->
-    
-    
-    <!-- Sample Post 1 -->
-<div class="post">
-        <div class="user-info">
-        	<img src="avatar.jpg" class="useravatar"  alt="Profile Icon" id="profile-icon" onclick="openProfilePage()">
-            <div class="details">
-                <span class="username" onclick="window.location='#'"></span>
-                <div class="metadata">
-                    1 d
-                   <img src="public.png" alt="public" >
-                </div>
-            </div>
-    
-            <div class="options" onclick="toggleOptionsMenu(1)" id="OptionsMenu_1">
-                <img src="option.png" alt="option" >
-            </div>
-        </div>
-        <div class="post-content">
-            <p>This is a sample post.</p>
-            <img class="post-image" src="avatar.jpg" alt="Post Image">
-        </div>
-        
-       
-        <div class="post-actions">
-            <div class="boxes" id="box1" onmousedown="startLongPress(event)" onmouseup="endLongPress()" ontouchstart="startLongPress(event)" ontouchend="endLongPress()">
-            <div class="box" id="likeBox1" onclick="toggleLike(event)">
-            <div id="like-part1"><img src="like.png" id="likeButton1" alt="like" class="like-icon"></div>
-            </div>
-            </div>
-            <div class="action-box" onclick="navigateToPage('comment')"  id="CommentButton_1">
-                <img src="comment.png" alt="comment" >
-            </div>
-            <div class="action-box" onclick="shareButtonClicked(1)" ondblclick="closeShareOptions(1);">
-                <img src="share.png" alt="share" >
-            </div>
-        </div>
+               // User info section
+                const userInfo = document.createElement('div');
+                userInfo.classList.add('user-info');
 
-   <div id="reactionsContainer" class="reactions">
-      <img src="namaste.png" alt="namaste" class="reaction" onclick="setReaction('namaste.png')">
-    <img src="like.png" alt="like" class="reaction" onclick="setReaction('like.png')">
-    <img src="dislike.png" alt="dislike" class="reaction" onclick="setReaction('dislike.png')">
-    <img src="lol.png" alt="happy" class="reaction" onclick="setReaction('lol.png')">
-    <img src="love.png" alt="love" class="reaction" onclick="setReaction('love.png')">
-    <img src="wow.png"  alt="wow" class="reaction" onclick="setReaction('wow.png')">
-    <img src="angry.png" alt="angry" class="reaction" onclick="setReaction('angry.png')">
-    <img src="sad.png" alt="sad" class="reaction" onclick="setReaction('sad.png')">
-  </div>
-  
-    <!-- Comment Modal for Post 1 -->
-    <div id="commentModal_1" class="modal">
-        <input type="text" class="modal-input" placeholder="Write a comment...">
-        <button class="modal-button" onclick="closeCommentModal(1)">Post Comment</button>
-        <!-- ... Your existing modal content ... -->
-    </div>
-    <!-- Options Modal for Post 1 -->
-    <div id="optionsModal_1" class="omodal" style="display: none;">
-    	 <div class="opt">
+                const userAvatar = document.createElement('img');
+                userAvatar.src = 'avatar.jpg'; // Path to user's avatar
+                userAvatar.alt = 'User Avatar';
+                userAvatar.classList.add('avatsr');
 
-    <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/create.png" alt="Report"  >
-      <div>
-      <div class="option-detailed"><span>Show more</span></div>
-      <div class="option-detaileds"><span>More of your post will be like this.</span></div>
-    </div></div>
-    <div>
-    <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/less.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Show less</span></div>
-      <div class="option-detaileds"><span>Fewer of your post will be like this.</span></div>
-    </div></div>
-    <div class="option-item" onclick="saveAction()">
-      <img src="/storage/emulated/0/htdocs/save.png" alt="Friends"  onclick="openSearchBox()" >
-      <div>
-      <div class="option-detailed"><span>Save post</span></div>
-      <div class="option-detaileds"><span>Add this to your saved items.</span></div>
-    </div></div>
-    <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/hide.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Hide post</span></div>
-      <div class="option-detaileds"><span>See fewer post like this.</span></div>
-      </div></div>
-      <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/report.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Report post</span></div>
-      <div class="option-detaileds"><span>We wont let user know who reported this.</span></div>
-      </div></div>
-      <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/notifications.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Turn on Notifications for this post</span></div>
-      </div></div>
-      <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/link.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Copy Link</span></div>
-      </div></div>
-      <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/favourate.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Add user to Favouratee</span></div>
-      <div class="option-detaileds"><span>Prioritize his post in News Feed.</span></div>
-      </div></div>
-      <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/snooz.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Snooz user for 30 days</span></div>
-      <div class="option-detaileds"><span>Temporarily stop seeing posts.</span></div>
-      </div></div>
-      <div class="option-item" onclick="followAction()">
-      <img src="/storage/emulated/0/htdocs/follow.png" alt="Friends"  onclick="openSearchBox()" >
-      	<div>
-      <div class="option-detailed"><span>Follow user</span></div>
-      <div class="option-detaileds"><span>Stop seeing post but stay friends.</span></div>
-    </div></div>
-        <button class="modal-button" onclick="closeOptionsMenu(1)">Cancel</button>
-        <!-- ... Your existing modal content ... -->
-    </div></div></div>
+                const details = document.createElement('div');
+                details.classList.add('details');
 
-    <!-- Share Options for Post 1 -->
-    <div id="shareOptions_1" class="modal" style="display: none;">
-    	<div class="option-item" onclick="shareOnFacebook()">
-      <img src="/storage/emulated/0/htdocs/edited.png" alt="facebook"  onclick="openFacebookBox()" >
-      <span class="option-text">Share on Facebook</span>
-    </div>
-    <div class="option-item" onclick="shareOnFacebook()">
-      <img src="/storage/emulated/0/htdocs/story.png" alt="facebook"  onclick="openFacebookBox()" >
-      <span class="option-text">Share on Story</span>
-    </div>
-    <div class="option-item" onclick="shareOnFacebook()">
-      <img src="/storage/emulated/0/htdocs/sharef.png" alt="facebook"  onclick="openFacebookBox()" >
-      <span class="option-text">Share on Friend's Profilr</span>
-    </div>
-    <div class="option-item" onclick="shareOnMessenger()">
-      <img src="/storage/emulated/0/htdocs/chat.png" alt="Chat"  onclick="openSearchBox()" >
-      <span class="option-text">Share on Messenger</span>
-    </div>
-         <div class="option-item" onclick="shareWithFriends()">
-        <img src="/storage/emulated/0/htdocs/friends.png" alt="Friends"  onclick="openSearchBox()" >
-      <span class="option-text">Share with Friends</span>
-    </div>
-    <div class="option-item" onclick="shareOnGroup()">
-      <img src="/storage/emulated/0/htdocs/group.png" alt="Group"  onclick="openSearchBox()" >
-      <span class="option-text">Share on Group</span>
-    </div>
-    <div class="option-item" onclick="shareOnPage()">
-      <img src="/storage/emulated/0/htdocs/page.png" alt="Page"  onclick="openSearchBox()" >
-      <span class="option-text">Share on Page</span>
-    </div>
-    <div class="option-item" onclick="showMoreOptions()">
-      <img src="/storage/emulated/0/htdocs/option.png" alt="option" >
-      <span class="option-text">More</span>
-    </div>
-    
-        <button class="modal-button" onclick="closeShareOptions(1)">Cancel</button>
-        <!-- ... Your existing modal content ... -->
-    </div>
-    </div>
+                const username = document.createElement('span');
+                username.textContent = 'User Name'; // Replace with actual user name
+                username.onclick = function() {
+                    window.location = '#'; // Add link functionality
+                };
 
-<!-- Sample Post 2 -->
-<div class="post">
-        <div class="user-info">
-        	<img src="avatar.jpg" class="useravatar"  alt="Profile Icon" id="profile-icon" onclick="openProfilePage()">
-            <div class="details">
-                <span class="user" onclick="window.location='#'">User Name</span>
-                <div class="metadata">
-                    1 d
-                   <img src="public.png" alt="public" >
-                </div>
-            </div>
-    <!-- Sample Post 1 -->
-    
-            <div class="options" onclick="toggleOptionsMenu(2)" id="OptionsMenu_2">
-                <img src="option.png" alt="option" >
-            </div>
-        </div>
-        
-        <div class="post-content">
-            <p>This is a sample post.</p>
-            <img class="post-image" src="avatar.jpg" alt="Post Image">
-        </div>
-        
-        
-        <div class="post-actions">
-            <div class="boxes" id="box2" onmousedown="startLongPress(event)" onmouseup="endLongPress()" ontouchstart="startLongPress(event)" ontouchend="endLongPress()">
-    <div class="box" id="likeBox2" onclick="toggleLike(event)">
-      <div id="like-part2"><img src="like.png" id="likeButton2" alt="like" class="like-icon"></div>
-    </div>
-  </div>
-            <div class="action-box" onclick="navigateToPage('comment')"  id="CommentButton_2">
-                <img src="comment.png" alt="comment" >
-            </div>
-            <div class="action-box" onclick="shareButtonClicked(2)" ondblclick="closeShareOptions(2);">
-                <img src="share.png" alt="share" >
-            </div>
-        </div>
-    </div>
-    <!-- Comment Modal for Post 2 -->
-    <div id="commentModal_2" class="modal">
-    	<input type="text" class="modal-input" placeholder="Write a comment...">
-        <button class="modal-button" onclick="closeCommentModal(2)">Post Comment</button>
-        <!-- ... Your existing modal content ... -->
-    </div>
-    <!-- Options Modal for Post 2 -->
-    <div id="optionsModal_2" class="omodal">
-    	 <div class="opt">
+                const metadata = document.createElement('div');
+                metadata.classList.add('metadata');
 
-    <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/create.png" alt="Report"  >
-      <div>
-      <div class="option-detailed"><span>Show more</span></div>
-      <div class="option-detaileds"><span>More of your post will be like this.</span></div>
-    </div></div>
-    <div>
-    <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/less.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Show less</span></div>
-      <div class="option-detaileds"><span>Fewer of your post will be like this.</span></div>
-    </div></div>
-    <div class="option-item" onclick="saveAction()">
-      <img src="/storage/emulated/0/htdocs/save.png" alt="Friends"  onclick="openSearchBox()" >
-      <div>
-      <div class="option-detailed"><span>Save post</span></div>
-      <div class="option-detaileds"><span>Add this to your saved items.</span></div>
-    </div></div>
-    <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/hide.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Hide post</span></div>
-      <div class="option-detaileds"><span>See fewer post like this.</span></div>
-      </div></div>
-      <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/report.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Report post</span></div>
-      <div class="option-detaileds"><span>We wont let user know who reported this.</span></div>
-      </div></div>
-      <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/notifications.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Turn on Notifications for this post</span></div>
-      </div></div>
-      <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/link.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Copy Link</span></div>
-      </div></div>
-      <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/favourate.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Add user to Favouratee</span></div>
-      <div class="option-detaileds"><span>Prioritize his post in News Feed.</span></div>
-      </div></div>
-      <div class="option-item" onclick="reportAction()">
-      <img src="/storage/emulated/0/htdocs/snooz.png" alt="Report"  >
-      	<div>
-      <div class="option-detailed"><span>Snooz user for 30 days</span></div>
-      <div class="option-detaileds"><span>Temporarily stop seeing posts.</span></div>
-      </div></div>
-      <div class="option-item" onclick="followAction()">
-      <img src="/storage/emulated/0/htdocs/follow.png" alt="Friends"  onclick="openSearchBox()" >
-      	<div>
-      <div class="option-detailed"><span>Follow user</span></div>
-      <div class="option-detaileds"><span>Stop seeing post but stay friends.</span></div>
-    </div></div>
-        <button class="modal-button" onclick="closeOptionsMenu(2)">Cancel</button>
-        <!-- ... Your existing modal content ... -->
-    </div></div></div>
+                const postDate = document.createElement('i');
+                postDate.textContent = '1 day ago'; // Replace with actual post date
 
-    <!-- Share Options for Post 2 -->
-    <div id="shareOptions_2" class="modal" style="display: none;">
-    	<div class="option-item" onclick="shareOnFacebook()">
-      <img src="/storage/emulated/0/htdocs/edited.png" alt="facebook"  onclick="openFacebookBox()" >
-      <span class="option-text">Share on Facebook</span>
-    </div>
-    <div class="option-item" onclick="shareOnFacebook()">
-      <img src="/storage/emulated/0/htdocs/story.png" alt="facebook"  onclick="openFacebookBox()" >
-      <span class="option-text">Share on Story</span>
-    </div>
-    <div class="option-item" onclick="shareOnFacebook()">
-      <img src="/storage/emulated/0/htdocs/sharef.png" alt="facebook"  onclick="openFacebookBox()" >
-      <span class="option-text">Share on Friend's Profilr</span>
-    </div>
-    <div class="option-item" onclick="shareOnMessenger()">
-      <img src="/storage/emulated/0/htdocs/chat.png" alt="Chat"  onclick="openSearchBox()" >
-      <span class="option-text">Share on Messenger</span>
-    </div>
-         <div class="option-item" onclick="shareWithFriends()">
-        <img src="/storage/emulated/0/htdocs/friends.png" alt="Friends"  onclick="openSearchBox()" >
-      <span class="option-text">Share with Friends</span>
-    </div>
-    <div class="option-item" onclick="shareOnGroup()">
-      <img src="/storage/emulated/0/htdocs/group.png" alt="Group"  onclick="openSearchBox()" >
-      <span class="option-text">Share on Group</span>
-    </div>
-    <div class="option-item" onclick="shareOnPage()">
-      <img src="/storage/emulated/0/htdocs/page.png" alt="Page"  onclick="openSearchBox()" >
-      <span class="option-text">Share on Page</span>
-    </div>
-    <div class="option-item" onclick="showMoreOptions()">
-      <img src="/storage/emulated/0/htdocs/option.png" alt="option" >
-      <span class="option-text">More</span>
-    </div>
-    
-        <button class="modal-button" onclick="closeShareOptions(2)">Cancel</button>
-        <!-- ... Your existing modal content ... -->
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    <!-- Repeat the structure for more posts as needed -->
+                const privacyIcon = document.createElement('img');
+                privacyIcon.src = 'public.png'; // Path to privacy icon image
+                privacyIcon.style.marginTop = '5px'; // Adjust margin as needed
 
- <div class="container">
-    <span class="peo">People you may know</span>
-    <div class="friend-scroll-container">
-    	<div class="friend-container">
-    	
-      <div class="friend-box" onclick="showfriend('User B')">
-          <div class="figure"><img src="/storage/emulated/0/htdocs/avatar.jpg" alt=""></div>
-          <div class="user1">User Name</div>
-          <div class="mutual1">
-            <img src="" alt="">
-            <span>+1 more mutual friends</span>
-          </div>
-          <div class="add">Add Friend</div>
-          </div>
+                const optionMenu = document.createElement('div');
+                optionMenu.classList.add('option');
+                optionMenu.onclick = function() {
+                    // Implement option menu functionality
+                };
 
-      <div class="friend-box" onclick="showfriend('User C')">
-          <div class="figure"><img src="/storage/emulated/0/htdocs/avatar.jpg" alt=""></div>
-          <div class="user1">User Name</div>
-          <div class="mutual1">
-            <img src="" alt="">
-            <span>+1 more mutual friends</span>
-          </div>
-          <div class="add">Add Friend</div>
-          </div>
+                const optionIcon = document.createElement('img');
+                optionIcon.src = 'option.png'; // Replace with your PNG image
+                optionIcon.classList.add('option-icon');
 
-      <div class="friend-box" onclick="showfriend('User D')">
-          <div class="figure"><img src="/storage/emulated/0/htdocs/avatar.jpg" alt=""></div>
-          <div class="user1">User Name</div>
-          <div class="mutual1">
-            <img src="" alt="">
-            <span>+2 more mutual friends</span>
-          </div>
-          <div class="add">Add Friend</div>
-          </div>
+                metadata.appendChild(postDate);
+                metadata.appendChild(privacyIcon);
+                details.appendChild(username);
+                details.appendChild(metadata);
+                userInfo.appendChild(userAvatar);
+                userInfo.appendChild(details);
+                userInfo.appendChild(optionMenu);
+                optionMenu.appendChild(optionIcon);
 
-      <div class="friend-box" onclick="showfriend('User E')">
-          <div class="figure"><img src="/storage/emulated/0/htdocs/avatar.jpg" alt=""></div>
-          <div class="user1">User Name</div>
-          <div class="mutual1">
-            <img src="" alt="">
-            <span>+1 more mutual friends</span>
-          </div>
-          <div class="add">Add Friend</div>
-          </div>
-    </div>
-  </div>
-  <div class="see">See all</div>
-  </div>
-<!-- Your posts and other content... -->
-<script src="script.js"></script>
+                newPost.appendChild(userInfo);
+
+                    // Display caption if available
+                    if (caption) {
+                        const captionElement = document.createElement('p');
+                        captionElement.textContent = `Caption: ${caption}`;
+                        newPost.appendChild(captionElement);
+                    } 
+
+                    // Display media
+                    if (mediaType === 'image') {
+                        const img = document.createElement('img');
+                        img.src = mediaUrl;
+                        img.style.maxWidth = '100%'; // Adjust size as needed
+                        img.style.maxHeight = '100%'; // Adjust size as needed
+                        newPost.appendChild(img);
+                    } else if (mediaType === 'video') {
+                        const video = document.createElement('video');
+                        video.src = mediaUrl;
+                        video.controls = true;
+                        video.style.maxWidth = '100%'; // Adjust size as needed
+                        video.style.maxHeight = '100%'; // Adjust size as needed
+                        newPost.appendChild(video);
+                    } 
+
+// Post actions (like, comment, share icons)
+const postActions = document.createElement('div');
+postActions.classList.add('post-actions');
+
+// Like action
+const likeBox = document.createElement('div');
+likeBox.classList.add('action-box');
+
+const likeIcon = document.createElement('img');
+likeIcon.src = 'like.png'; // Path to like icon image
+likeIcon.classList.add('like-icon');
+likeIcon.onclick = function() {
+    console.log('Like functionality to be implemented');
+};
+
+likeBox.appendChild(likeIcon);
+postActions.appendChild(likeBox);
+
+// Comment action
+const commentBox = document.createElement('div');
+commentBox.classList.add('action-box');
+
+const commentIcon = document.createElement('img');
+commentIcon.src = 'comment.png'; // Path to comment icon image
+commentIcon.classList.add('comment-icon');
+commentIcon.onclick = function() {
+    console.log('Comment functionality to be implemented');
+};
+
+commentBox.appendChild(commentIcon);
+postActions.appendChild(commentBox);
+
+// Share action
+const shareBox = document.createElement('div');
+shareBox.classList.add('action-box');
+
+const shareIcon = document.createElement('img');
+shareIcon.src = 'share.png'; // Path to share icon image
+shareIcon.classList.add('share-icon');
+shareIcon.onclick = function() {
+    console.log('Share functionality to be implemented');
+};
+
+shareBox.appendChild(shareIcon);
+postActions.appendChild(shareBox);
+
+newPost.appendChild(postActions);
+
+                    postsContainer.appendChild(newPost);
+                } else if (caption) {
+                    // Display caption without media
+                    const newPost = document.createElement('div');
+                    newPost.classList.add('post');
+                    const captionElement = document.createElement('p');
+                    captionElement.textContent = `Caption: ${caption}`;
+                    newPost.appendChild(captionElement);
+                    postsContainer.appendChild(newPost);
+                }
+            } 
+
+            // Clear localStorage after displaying posts
+            localStorage.clear();
+        } 
+
+        // Call the displayPosts function when the page loads
+        displayPosts();
+    </script>
 </body>
 </html>
